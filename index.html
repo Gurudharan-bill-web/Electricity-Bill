@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Electricity Bill Calculator</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        /* =========================
+           SCHOOL HEADER
+        ========================== */
+
+        .school-header {
+
+            background-image: url("school.png");
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+
+            height: 450px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+
+            position: relative;
+
+            color: white;
+        }
+
+        /* Dark Overlay */
+
+        .school-header::before {
+
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            background: rgba(0, 0, 0, 0.55);
+        }
+
+        /* =========================
+           SCHOOL LOGO
+        ========================== */
+
+        .school-logo {
+
+            position: absolute;
+
+            top: 20px;
+            left: 20px;
+
+            width: 100px;
+            height: 100px;
+
+            object-fit: contain;
+
+            //background-color: white;
+
+            padding: 8px;
+
+            border-radius: 12px;
+
+            z-index: 2;
+        }
+
+        /* =========================
+           HEADER CONTENT
+        ========================== */
+
+        .header-content {
+
+            position: relative;
+
+            z-index: 1;
+
+            max-width: 900px;
+
+            padding: 20px;
+        }
+
+        .header-content h1 {
+
+            font-size: 42px;
+
+            margin-bottom: 20px;
+        }
+
+        .header-content p {
+
+            font-size: 18px;
+
+            line-height: 1.8;
+        }
+
+        /* =========================
+           CALCULATOR BOX
+        ========================== */
+
+        .container {
+
+            width: 400px;
+
+            background-color: white;
+
+            margin: 40px auto;
+
+            padding: 30px;
+
+            border-radius: 12px;
+
+            box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
+
+            text-align: center;
+        }
+
+        .container h2 {
+
+            color: #003366;
+        }
+
+        input {
+
+            width: 90%;
+
+            padding: 12px;
+
+            margin-top: 15px;
+
+            font-size: 16px;
+
+            border-radius: 6px;
+
+            border: 1px solid #ccc;
+        }
+
+        button {
+
+            margin-top: 20px;
+
+            padding: 12px 20px;
+
+            background-color: #003366;
+
+            color: white;
+
+            border: none;
+
+            cursor: pointer;
+
+            font-size: 16px;
+
+            border-radius: 6px;
+        }
+
+        button:hover {
+
+            background-color: #0055aa;
+        }
+
+        #result {
+
+            margin-top: 20px;
+
+            font-size: 22px;
+
+            color: green;
+
+            font-weight: bold;
+        }
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        .footer {
+
+            text-align: center;
+
+            padding: 15px;
+
+            background-color: #003366;
+
+            color: white;
+
+            font-size: 14px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- =========================
+         SCHOOL HEADER
+    ========================== -->
+
+    <div class="school-header">
+
+        <!-- School Logo -->
+        <img src="logo.png"
+             alt="School Logo"
+             class="school-logo">
+
+        <!-- School Content -->
+        <div class="header-content">
+
+            <h1>
+                Chellappan Vidya Mandir International School
+            </h1>
+
+            <p>
+                Chellappan Vidya Mandir International School is recognized as a
+                top-tier international institution offering a comprehensive
+                curriculum and state-of-the-art infrastructure. The school
+                emphasizes academic excellence, holistic development, and
+                global perspectives, preparing students for international
+                education pathways.
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- =========================
+         ELECTRICITY BILL CALCULATOR
+    ========================== -->
+
+    <div class="container">
+
+        <h2>Electricity Bill Calculator</h2>
+
+        <input type="number"
+               id="units"
+               placeholder="Enter Units Consumed">
+
+        <br>
+
+        <button onclick="calculateBill()">
+            Calculate Bill
+        </button>
+
+        <div id="result"></div>
+
+    </div>
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <div class="footer">
+
+        Developed for School Project |
+        Class 12 Computer Science
+
+    </div>
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+        function bill(units) {
+
+            let amount;
+
+            if (units <= 100) {
+
+                amount = units * 2;
+            }
+
+            else if (units <= 200) {
+
+                amount =
+                    (100 * 2) +
+                    ((units - 100) * 3);
+            }
+
+            else {
+
+                amount =
+                    (100 * 2) +
+                    (100 * 3) +
+                    ((units - 200) * 5);
+            }
+
+            return amount;
+        }
+
+        function calculateBill() {
+
+            let units =
+                parseInt(
+                    document.getElementById("units").value
+                );
+
+            if (isNaN(units) || units < 0) {
+
+                document.getElementById("result").innerHTML =
+                    "Please enter valid units";
+
+                return;
+            }
+
+            let totalBill = bill(units);
+
+            document.getElementById("result").innerHTML =
+                "Total Electricity Bill = ₹ " + totalBill;
+        }
+
+    </script>
+
+</body>
+
+</html>
